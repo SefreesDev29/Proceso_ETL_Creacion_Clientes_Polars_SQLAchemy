@@ -1,0 +1,23 @@
+[project]
+name = "proceso-etl-creacion-clientes"
+version = "0.2.0"
+description = "Cargar Información de Creación de Clientes (CSV/Excel) al Datamart (SQL Server)"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "charset-normalizer>=3.4.4",
+    "fastexcel>=0.18.0",
+    "loguru>=0.7.3",
+    "pandas>=2.3.3",
+    "polars>=1.36.1",
+    "pyodbc>=5.3.0",
+    "python-decouple>=3.8",
+    "rich>=14.2.0",
+    "sqlalchemy>=2.0.45",
+]
+
+[dependency-groups]
+dev = [
+    "prompt-toolkit>=3.0.51",
+    "pyinstaller>=6.17.0",
+]
