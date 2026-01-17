@@ -19,7 +19,8 @@ from charset_normalizer import from_bytes
 # import os, sys, shutil, tempfile
 # import xlrd, time
 import sys, socket, getpass, math, shutil, tempfile
-from decouple import config
+from config import settings
+# from decouple import config
 # import warnings
 
 # pyinstaller --noconfirm --onefile Carga_Reportes_Clientes_Dev.py --icon "Recursos/logo.ico"
@@ -157,8 +158,8 @@ class ConnectionDB_SQLServer_SQLAlchemy:
     def __init__(self, process_name: str):
         self.process_name = process_name
         self.driver=r'ODBC Driver 17 for SQL Server' #config('DEBUG', default=False, cast=bool)
-        self.db_ip = config('BD_IP')
-        self.db_name = config('BD_NAME')
+        self.db_ip = settings.BD_IP 
+        self.db_name = settings.BD_NAME
         self.Open_Connection()
 
     def create_connection(self):
@@ -171,8 +172,8 @@ class ConnectionDB_SQLServer_SQLAlchemy:
             if 'timeout expired' in str(e).lower():
                 raise Exception(f"{e}")
             try:
-                self.db_user = config('BD_USER_DEV_1')
-                self.db_password = config('BD_PASSWORD_DEV_1')
+                self.db_user = settings.BD_USER_DEV_1
+                self.db_password = settings.BD_PASSWORD_DEV_1
                 encoded_password = quote_plus(self.db_password)
 
                 self.string_connection_pl = f'mssql+pyodbc://{self.db_user}:{encoded_password}@{self.db_ip}/{self.db_name}?driver={self.driver}'
@@ -180,8 +181,8 @@ class ConnectionDB_SQLServer_SQLAlchemy:
                 self.conn = self.engine.connect()
                 self.verification_date_register()
             except Exception as e:
-                self.db_user = config('BD_USER_DEV_2')
-                self.db_password = config('BD_PASSWORD_DEV_2')
+                self.db_user = settings.BD_USER_DEV_2
+                self.db_password = settings.BD_PASSWORD_DEV_2
                 encoded_password = quote_plus(self.db_password)
 
                 self.string_connection_pl = f'mssql+pyodbc://{self.db_user}:{encoded_password}@{self.db_ip}/{self.db_name}?driver={self.driver}'
